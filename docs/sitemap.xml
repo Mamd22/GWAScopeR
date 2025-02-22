@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/coVar_Filter.html</loc>
+  </url>
+  <url>
+    <loc>/reference/GWAS_GLM.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/manhattan_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_cumulative_variance.html</loc>
+  </url>
+  <url>
+    <loc>/reference/qq_plot_gwas.html</loc>
+  </url>
+  <url>
+    <loc>/reference/varPCs.html</loc>
+  </url>
+</urlset>
