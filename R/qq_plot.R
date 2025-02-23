@@ -15,8 +15,12 @@ qq_plot_gwas <- function(p_values) {
   # Observed p-values sorted in ascending order
   p.obs <- -log10(sort(p_values, decreasing = FALSE))  # Observed quantiles
 
+  # Ordering of observed and expected p-values
+  order.obs <- order(p_values)
+  order.uni <- order(p.uni)
+
   # Create the QQ-plot with hollow circles
-  plot(p.uni, p.obs,
+  plot(-log10(p.uni[order.uni]), -log10(p_values[order.obs]),
        xlab = "Expected -log10(P)",
        ylab = "Observed -log10(P)",
        main = "QQ-Plot of GWAS P-values",
@@ -26,6 +30,7 @@ qq_plot_gwas <- function(p_values) {
   # Add the reference line (y = x)
   abline(a = 0, b = 1, col = "red", lwd = 2)
 }
+
 
 
 
