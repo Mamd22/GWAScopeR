@@ -3,7 +3,7 @@ Type: Package
 Title: A Package for GWAS using Generalized Linear Models
 Version: 0.1.0
 Authors@R: 
-    person("Marcano-Delgado", "Michelle", email = "your@email.com", role = c("aut", "cre"))
+    person( "Michelle", "Marcano-Delgado",email = "your@email.com", role = c("aut", "cre"))
 Description: GWAScopeR provides functions for performing GWAS using GLM, including covariate filtering, PCA-based dimensionality reduction, and visualization with Manhattan plots.
 License: MIT
 Encoding: UTF-8
@@ -19,3 +19,6 @@ Suggests:
     knitr,
     rmarkdown
 RoxygenNote: 7.3.1
+navbar:
+  title: "GWAScopeR"
+  logo: "inst/images/logo.png"

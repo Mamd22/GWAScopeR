@@ -54,7 +54,13 @@ The function fits a Generalized Linear Model (GLM) with a Gaussian family for ea
 set.seed(123)
 y <- rnorm(100)  # Phenotype values
 X <- matrix(sample(c(0, 1, 2), 100 * 500, replace = TRUE), ncol = 500)  # Genotype matrix
-C <- matrix(rnorm(500 * 5), ncol = 5)  # Covariates
+C <- data.frame(
+  ID = 1:100,  # Unique identifier for each individual
+  Cov1 = rnorm(100),
+  Cov2 = rnorm(100),
+  Cov3 = rnorm(100),
+  Cov4 = rnorm(100),
+  Cov5 = rnorm(100))
 
 # Run GWAS
 p_values <- GWAS_GLM(y, X, C=C)

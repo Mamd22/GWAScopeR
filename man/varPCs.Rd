@@ -47,7 +47,10 @@ varPCs(X, variance_threshold = 0.80, remove_NAs = FALSE)
 \examples{
   # Example 1: Calculate the number of PCs that explain at least 80% of the variance
   # Assuming 'genotype_matrix' is a data frame or matrix of SNP genotypes
+   set.seed(123)
+   genotype_matrix <- matrix(sample(c(0, 1, 2), 100 * 500, replace = TRUE), ncol = 500)  # Genotype matrix
   num_PCs <- varPCs(genotype_matrix, variance_threshold = 0.80)
+  num_PCs
 
   # Example 2: Remove NAs before calculating the number of PCs
   num_PCs_no_NAs <- varPCs(genotype_matrix, variance_threshold = 0.80, remove_NAs = TRUE)

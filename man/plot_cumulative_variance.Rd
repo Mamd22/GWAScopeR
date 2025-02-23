@@ -42,10 +42,13 @@ plot_cumulative_variance(X, variance_threshold = 0.80, remove_NAs = FALSE)
 }
 \examples{
   # Example 1: Plot cumulative variance with a variance threshold of 80%
-  plot_cumulative_variance(X, variance_threshold = 0.80)
+   set.seed(123)
+   library(ggplot2)  # Ensure ggplot2 is loaded
+  genotype_matrix <- matrix(sample(c(0, 1, 2), 100 * 500, replace = TRUE), ncol = 500)  # Genotype matrix
+  plot_cumulative_variance(genotype_matrix, variance_threshold = 0.80)
 
   # Example 2: Remove rows with NA values and use a 90% variance threshold
-  plot_cumulative_variance(X, variance_threshold = 0.90, remove_NAs = TRUE)
+  plot_cumulative_variance(genotype_matrix, variance_threshold = 0.90, remove_NAs = TRUE)
 }
 \keyword{PCA}
 \keyword{Variance}

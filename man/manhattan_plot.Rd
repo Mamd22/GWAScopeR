@@ -65,11 +65,39 @@ manhattan_plot(map_data, pval_vector = NULL, gwas_data = NULL,
   \code{\link{varPCs}}, \code{\link{prcomp}}, \code{\link{p.adjust}}, \code{\link{qchisq}}
 }
 \examples{
-  # Example 1: Generate Manhattan plot with p-values and GWAS data
-  manhattan_plot(map_data, pval_vector = pval_vector, threshold_type = c("fixed", "bonferroni"), alpha = 0.01)
+# Load required packages
+library(dplyr)
+library(ggplot2)
 
-  # Example 2: Generate Manhattan plot with custom top QTN positions
-  manhattan_plot(map_data, gwas_data = gwas_data, num_qtns = 5, user_qtn_positions = c(100, 200, 300))
+# Simulated data
+set.seed(123)
+y <- rnorm(100)  # Phenotype values
+X <- matrix(sample(c(0, 1, 2), 100 * 500, replace = TRUE), ncol = 500)  # Genotype matrix
+C <- data.frame(
+  ID = 1:100,  # Unique identifier for each individual
+  Cov1 = rnorm(100),
+  Cov2 = rnorm(100),
+  Cov3 = rnorm(100),
+  Cov4 = rnorm(100),
+  Cov5 = rnorm(100)
+)
+
+map_data <- data.frame(
+  SNP = paste0("SNP", 1:500),                   # SNP identifiers
+  Chromosome = sample(1:10, 500, replace = TRUE),  # Randomly assign SNPs to 10 chromosomes
+  Position = sample(1:1e6, 500, replace = TRUE)    # Random positions in base pairs
+)
+
+# Ensure GWAS_GLM function is available
+if (exists("GWAS_GLM")) {
+  p_values <- GWAS_GLM(y, X, C=C)  # Run GWAS
+
+  # Generate Manhattan plot
+  manhattan_plot(map_data, pval_vector = p_values, threshold_type = c("fixed", "bonferroni"), alpha = 0.01)
+} else {
+  warning("GWAS_GLM function not found. Ensure GWAS_GLM is correctly defined before running this example.")
 }
+}
+
 \keyword{GWAS}
 \keyword{Manhattan Plot}

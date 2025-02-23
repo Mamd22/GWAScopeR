@@ -58,7 +58,12 @@ This function is useful for filtering out PCs that may not provide independent v
 }
 \examples{
 ## Example 1: Filter covariates by removing linearly dependent PCs (keeping top 10 PCs)
+ set.seed(123)
+genotype_matrix <- matrix(sample(c(0, 1, 2), 100 * 500, replace = TRUE), ncol = 500)  # Genotype matrix
+covariate_matrix <- matrix(rnorm(500 * 5), ncol = 5)  # Covariates
+
 filtered_covariates <- coVar_Filter(genotype_matrix, covariate_matrix, num_PCs = 10)
+head(filtered_covariates)
 
 ## Example 2: Automatically determine the number of PCs to retain based on the variance threshold
 filtered_covariates <- coVar_Filter(genotype_matrix, covariate_matrix, num_PCs = "varPCs", variance_threshold = 0.80)

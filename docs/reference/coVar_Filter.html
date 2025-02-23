@@ -108,12 +108,36 @@ and PCs that are not linearly dependent on each other.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Example 1: Filter covariates by removing linearly dependent PCs (keeping top 10 PCs)</span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">genotype_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, <span class="fl">100</span> <span class="op">*</span> <span class="fl">500</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">500</span><span class="op">)</span>  <span class="co"># Genotype matrix</span></span></span>
+<span class="r-in"><span><span class="va">covariate_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">500</span> <span class="op">*</span> <span class="fl">5</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>  <span class="co"># Covariates</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">filtered_covariates</span> <span class="op">&lt;-</span> <span class="fu">coVar_Filter</span><span class="op">(</span><span class="va">genotype_matrix</span>, <span class="va">covariate_matrix</span>, num_PCs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in coVar_Filter(genotype_matrix, covariate_matrix, num_PCs = 10):</span> object 'genotype_matrix' not found</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">filtered_covariates</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            1            2          3             4          5        PC1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.3202214  0.005074796 -0.1551520 -0.2988862816 -0.5468950  4.7236925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.2274341  1.611618513 -0.5453526 -0.0006212909 -1.2365944  3.7276472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.1948882  0.509342670 -1.2792133  2.4435849328  0.2523382  1.7326849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.1698660  1.080393772  0.1379318  0.8393081130 -0.3356361  0.7628494</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.4889679  1.312839587  1.0734213  0.0640024830 -0.6295072 -2.3226955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.2607975 -0.858659339 -0.5883604  0.0848489681  0.1339525  3.7654215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          PC2        PC3          PC4        PC5        PC6        PC7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.4098598 -0.2887493  2.293134606 -3.3197207  2.6069942 -1.4108729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.4531534 -2.9462645  0.008275828  2.5126370 -1.1261136 -1.1726880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -1.7341891 -1.9878724 -0.253216763 -3.8908908 -4.6750506  0.5539815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -6.1098026  2.6841439  2.860310716  1.3495148  0.2447669  1.2634274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.8032023 -5.1038478  0.978313352  0.2845096 -0.1262364 -1.3682783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.7690202 -2.7114759  4.652995344 -1.5605501  1.2200321 -0.9514023</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          PC8        PC9       PC10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.3633561 -1.4703846  3.5072811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -1.2569230  2.4778511  0.5030242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3.9990525 -3.9571915  0.1248838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4.3477501 -4.4694407  0.8116271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -3.9339657 -0.0664483 -1.3033802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.1844682  1.5659617  3.6812083</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Example 2: Automatically determine the number of PCs to retain based on the variance threshold</span></span></span>
 <span class="r-in"><span><span class="va">filtered_covariates</span> <span class="op">&lt;-</span> <span class="fu">coVar_Filter</span><span class="op">(</span><span class="va">genotype_matrix</span>, <span class="va">covariate_matrix</span>, num_PCs <span class="op">=</span> <span class="st">"varPCs"</span>, variance_threshold <span class="op">=</span> <span class="fl">0.80</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in varPCs(X, variance_threshold):</span> object 'genotype_matrix' not found</span>
 </code></pre></div>
     </div>
   </div>
@@ -124,7 +148,7 @@ and PCs that are not linearly dependent on each other.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Marcano-Delgado Michelle.</p>
+  <p></p><p>Developed by Michelle Marcano-Delgado.</p>
 </div>
 
 <div class="pkgdown">
